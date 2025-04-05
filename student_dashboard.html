@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Portal</title>
+    <link rel="stylesheet" href="student_dashboard.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Login Section -->
+        <div id="loginSection" class="section active">
+            <h2>Student Portal Login</h2>
+            <form id="loginForm">
+                <input type="text" id="username" placeholder="College ID" required>
+                <input type="password" id="password" placeholder="Password" required>
+                <button type="submit">Login</button>
+            </form>
+        </div>
+
+        <!-- Dashboard Section -->
+        <div id="dashboardSection" class="section">
+            <nav>
+                <button onclick="showSection('courses')">Courses</button>
+                <button onclick="showSection('lectures')">Lectures</button>
+                <button onclick="showSection('assignments')">Assignments</button>
+                <button onclick="showSection('quizzes')">Quizzes</button>
+                <button onclick="showSection('grades')">Grades</button>
+                <button onclick="logout()">Logout</button>
+            </nav>
+
+            <!-- Courses Section -->
+            <div id="courses" class="subsection">
+                <h3>Available Courses</h3>
+                <div id="courseList" class="grid"></div>
+            </div>
+
+            <!-- Lectures Section -->
+            <div id="lectures" class="subsection">
+                <h3>My Lectures</h3>
+                <div id="lectureList" class="list"></div>
+            </div>
+
+            <!-- Assignments Section -->
+            <div id="assignments" class="subsection">
+                <h3>Assignments</h3>
+                <div id="assignmentList" class="list"></div>
+            </div>
+
+            <!-- Quizzes Section -->
+            <div id="quizzes" class="subsection">
+                <h3>Quizzes & Exams</h3>
+                <div id="quizList" class="list"></div>
+            </div>
+
+            <!-- Grades Section -->
+            <div id="grades" class="subsection">
+                <h3>Grades & Feedback</h3>
+                <div id="gradeList" class="list"></div>
+            </div>
+        </div>
+
+        <!-- Notifications -->
+        <div id="notifications" class="notifications"></div>
+    </div>
+    <script src="student_dashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faculty Portal - EduLearn</title>
+    <link rel="stylesheet" href="/faculty_dashboard.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+<body>
+    <div class="faculty-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <img src="https://images.unsplash.com/photo-1497633762265-9d179a990aa6?ixlib=rb-1.2.1&auto=format&fit=crop&w=64&q=80" alt="EduLearn Logo">
+                <h1>Faculty Portal</h1>
+            </div>
+            <nav class="nav-menu">
+                <a href="#dashboard" class="nav-item active" data-section="dashboard">Dashboard</a>
+                <a href="#courses" class="nav-item" data-section="courses">My Courses</a>
+                <a href="#assignments" class="nav-item" data-section="assignments">Assignments</a>
+                <a href="#students" class="nav-item" data-section="students">Student Progress</a>
+                <a href="#announcements" class="nav-item" data-section="announcements">Announcements</a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="top-bar">
+                <div class="search-bar">
+                    <input type="search" placeholder="Search courses, assignments...">
+                </div>
+                <div class="user-menu">
+                    <span class="notifications">
+                        <span class="notification-count">5</span>
+                    </span>
+                    <div class="faculty-profile">
+                        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&auto=format&fit=crop&w=32&q=80" alt="Faculty">
+                        <span>Dr. Sarah Johnson</span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Dashboard Section -->
+            <section id="dashboard" class="section active">
+                <h2>Dashboard Overview</h2>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <h3>Active Courses</h3>
+                        <p class="stat-number">4</p>
+                        <span class="stat-trend positive">2 ongoing lectures</span>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Total Students</h3>
+                        <p class="stat-number">156</p>
+                        <span class="stat-trend positive">+12 this semester</span>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Pending Assignments</h3>
+                        <p class="stat-number">23</p>
+                        <span class="stat-trend negative">8 overdue</span>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Average Performance</h3>
+                        <p class="stat-number">85%</p>
+                        <span class="stat-trend positive">+5% from last term</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Courses Section -->
+            <section id="courses" class="section">
+                <h2>Course Management</h2>
+                <div class="action-bar">
+                    <button class="btn primary" id="createCourseBtn">Create New Course</button>
+                    <button class="btn secondary">Import Course</button>
+                </div>
+                <div class="course-grid" id="courseGrid">
+                    <!-- Populated by JavaScript -->
+                </div>
+            </section>
+
+            <!-- Assignments Section -->
+            <section id="assignments" class="section">
+                <h2>Assignment Management</h2>
+                <div class="action-bar">
+                    <button class="btn primary" id="createAssignmentBtn">Create Assignment</button>
+                    <button class="btn secondary">Create Quiz</button>
+                </div>
+                <div class="table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Course</th>
+                                <th>Due Date</th>
+                                <th>Submissions</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="assignmentTableBody">
+                            <!-- Populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Student Progress Section -->
+            <section id="students" class="section">
+                <h2>Student Performance Tracking</h2>
+                <div class="report-card">
+                  <h3>Class Performance</h3>
+                  <canvas id="classPerformanceChart"></canvas>
+                </div>
+                
+                <div class="report-card">
+                  <h3>Assignment Completion</h3>
+                  <canvas id="assignmentCompletionChart"></canvas>
+                </div>
+                
+                <div class="table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Student Name</th>
+                                <th>Course</th>
+                                <th>Attendance</th>
+                                <th>Assignments</th>
+                                <th>Average Grade</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="studentTableBody">
+                            <!-- Populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Announcements Section -->
+            <section id="announcements" class="section">
+                <h2>Course Announcements</h2>
+                <div class="announcement-composer">
+                    <textarea placeholder="Write your announcement..."></textarea>
+                    <div class="composer-actions">
+                      <label for="courseSelect" class="sr-only">Choose a Course:</label>
+                      <select id="courseSelect">
+                        <option value="">Select Course</option>
+                        <!-- Populated by JavaScript -->
+                      </select>
+                      
+                        <button class="btn primary">Post Announcement</button>
+                    </div>
+                </div>
+                <div class="announcement-list" id="announcementList">
+                    <!-- Populated by JavaScript -->
+                </div>
+            </section>
+        </main>
+
+        <!-- Modal for Course Creation -->
+        <div id="courseModal" class="modal">
+            <div class="modal-content">
+                <h2>Create New Course</h2>
+                <form id="courseForm">
+                    <div class="form-group">
+                        <label for="courseTitle">Course Title</label>
+                        <input type="text" id="courseTitle" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="courseDescription">Description</label>
+                        <textarea id="courseDescription" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="courseSchedule">Schedule</label>
+                        <input type="text" id="courseSchedule" required>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn secondary" onclick="closeModal('courseModal')">Cancel</button>
+                        <button type="submit" class="btn primary">Create Course</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Modal for Assignment Creation -->
+        <div id="assignmentModal" class="modal">
+            <div class="modal-content">
+                <h2>Create New Assignment</h2>
+                <form id="assignmentForm">
+                    <div class="form-group">
+                        <label for="assignmentTitle">Assignment Title</label>
+                        <input type="text" id="assignmentTitle" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="assignmentCourse">Course</label>
+                        <select id="assignmentCourse" required>
+                            <!-- Populated by JavaScript -->
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="dueDate">Due Date</label>
+                        <input type="datetime-local" id="dueDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="assignmentDescription">Instructions</label>
+                        <textarea id="assignmentDescription" required></textarea>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn secondary" onclick="closeModal('assignmentModal')">Cancel</button>
+                        <button type="submit" class="btn primary">Create Assignment</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="/faculty_dashboard.js"></script>
+</body>
+</html>
